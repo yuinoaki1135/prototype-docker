@@ -1,0 +1,52 @@
+create TABLE IF NOT EXISTS `prototype`.`users` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT 'ユーザーID'
+  , `mail` VARCHAR (256) NOT NULL COMMENT 'メールアドレス'
+  , `gender` SMALLINT (1) NOT NULL COMMENT '性別'
+  , `password` VARCHAR (256) NOT NULL COMMENT 'パスワード'
+  , `birthdate` DATE NOT NULL COMMENT '生年月日'
+  , `create_user_id` INT NULL COMMENT '作成者ID'
+  , `create_timestamp` TIMESTAMP NULL COMMENT '作成日時'
+  , PRIMARY KEY (`id`)
+  , UNIQUE INDEX `mail_UNIQUE` (`mail`)
+) ENGINE = Innodb
+, DEFAULT character set utf8
+, COMMENT = 'ユーザー'
+;
+
+create TABLE IF NOT EXISTS `prototype`.`RUNBOOK_CONTENTS` (
+  `RUNBOOK_CONTENTS_ID` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'RUNBOOK_CONTENTS_ID'
+  , `TAGET_TOOL_ID_CONTAINTS` VARCHAR (50) NOT NULL COMMENT '対象となるツールIDをカンマ区切りで入力。CONTAINTSで引っ掛ける'
+  , `TAGET_TOOL_NM` VARCHAR (50) COMMENT '対象ツールの説明用'
+  , `RUNBOOK_EXEC_ID` INT UNSIGNED NOT NULL COMMENT 'RUNBOOK_EXEC_MSTのID'
+  , `RUNBOOK_EXEC_NM` VARCHAR (50) COMMENT 'RUNBOOK_EXEC_MSTの名称'
+  , `EXEC_ORDER` INT UNSIGNED NOT NULL COMMENT '同一RUNBOOK_EXEC_MST内の実行順'
+  , `EXEC_CONTENTS` VARCHAR (1000) COMMENT '実行内容'
+  , `CONFIG1` VARCHAR (1000) COMMENT '設定・確認箇所1'
+  , `CONFIG2` VARCHAR (1000) COMMENT '設定・確認箇所2'
+  , `CONFIG3` VARCHAR (1000) COMMENT '設定・確認箇所3'
+  , `CONFIG_VAL` VARCHAR (1000) COMMENT '設定値'
+  , `REMARKS` VARCHAR (1000) COMMENT '備考'
+  , `INPUT_DATETIME` DATETIME COMMENT '登録時間'
+  , `INPUT_USERNAME` VARCHAR (20) COMMENT '登録ユーザー名'
+  , `LASTUPDATE_DATETIME` DATETIME COMMENT '最終更新時間'
+  , `LASTUPDATE_USERNAME` VARCHAR (20) COMMENT '最終更新ユーザー名'
+  , PRIMARY KEY (`RUNBOOK_CONTENTS_ID`)
+) ENGINE = Innodb
+, COMMENT = '手順書作成用のテーブル'
+;
+
+create TABLE IF NOT EXISTS `prototype`.`users_history` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT 'ユーザー履歴ID'
+  , `user_id` INT COMMENT 'ユーザーID'
+  , `mail` VARCHAR (256) NOT NULL COMMENT 'メールアドレス'
+  , `gender` SMALLINT (1) NOT NULL COMMENT '性別'
+  , `password` VARCHAR (256) NOT NULL COMMENT 'パスワード'
+  , `birthdate` DATE NOT NULL COMMENT '生年月日'
+  , `note` VARCHAR (256) COMMENT '変更事由'
+  , `create_user_id` INT NULL COMMENT '作成者ID'
+  , `create_timestamp` TIMESTAMP NULL COMMENT '作成日時'
+  , PRIMARY KEY (`id`)
+) ENGINE = Innodb
+, DEFAULT character set utf8
+, COMMENT = 'ユーザー履歴'
+;
