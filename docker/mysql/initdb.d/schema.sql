@@ -35,6 +35,23 @@ create TABLE IF NOT EXISTS `prototype`.`RUNBOOK_CONTENTS` (
 , COMMENT = '手順書作成用のテーブル'
 ;
 
+
+create TABLE IF NOT EXISTS `prototype`.`TOOL_MST` (
+  `TOOL_ID` INT UNSIGNED NOT NULL COMMENT 'TOOL_ID'
+  , `TOOL_NM` VARCHAR (50) NOT NULL COMMENT 'ツールの名称'
+  , `TOOL_GENRE` VARCHAR (50) COMMENT 'ツールの分類(SCMとか通知ツールとか。メモ項目)'
+  , `TOOL_ADD_OPTION` INT UNSIGNED NOT NULL COMMENT '将来の予約用。GitHubとgitHub Enterpriseで異なる場合とかの区別用'
+  , `USE_FLG` BOOLEAN COMMENT '有効フラグ(1：有効)'
+  , `REMARKS` VARCHAR (1000) COMMENT '備考'
+  , `INPUT_DATETIME` DATETIME COMMENT '登録時間'
+  , `INPUT_USERNAME` VARCHAR (20) COMMENT '登録ユーザー名'
+  , `LASTUPDATE_DATETIME` DATETIME COMMENT '最終更新時間'
+  , `LASTUPDATE_USERNAME` VARCHAR (20) COMMENT '最終更新ユーザー名'
+  , PRIMARY KEY (`RUNBOOK_CONTENTS_ID`)
+) ENGINE = Innodb
+, COMMENT = 'ツールの一覧。増えてきたらSCMとか通知ツールとかの分類マスターも作成するかも'
+;
+
 create TABLE IF NOT EXISTS `prototype`.`users_history` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT 'ユーザー履歴ID'
   , `user_id` INT COMMENT 'ユーザーID'
